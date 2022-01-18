@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Product>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hdd Products</title>
+    <style>
+        table, th, td {
+            border: solid 1px #bbbbbb;
+            border-collapse: collapse;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hdd Products</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.ProductID</td>
+                    <td>@p.Name</td>
+                    <td>@p.Description</td>
+                    <td>@p.Price.ToString("c")</td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <a asp-action="Edit" asp-route-productId="@p.ProductID" class="btn btn-light">Edit</a>
+                            <input type="hidden" name="ProductID" value="@p.ProductID"/>
+                            <button tipe="submit" class="btn btn-dark">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-action="Create" class="btn btn-info">Add Product</a>
+    </div>
+</body>
+</html>
